@@ -136,7 +136,7 @@ const overlayMaterial = new THREE.ShaderMaterial({
     ` 
 })
 const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
-// scene.add(overlay)
+scene.add(overlay)
 
 ttfLoader.load( './fonts/Metropolis-Medium-500.ttf', function ( json ) {
     const font = new Font( json )
@@ -721,7 +721,7 @@ const tick = () =>
     }
 
     if (scrollYRatio < 0.1) {
-        
+
     }
 
     console.log("Camera position", camera.position)
