@@ -1,0 +1,62 @@
+*
+{
+    margin: 0;
+    padding: 0;
+}
+
+html
+{
+    background: #1e1a20;
+}
+
+.webgl
+{
+    position: fixed;
+    top: 0;
+    left: 0;
+}
+
+
+.section
+{
+    display: inline-flex;
+    align-items: center;
+    height: 100vh;
+    width: 50vw;
+    position: relative;
+    font-family: 'Lato', sans-serif;
+    color: #ffeded;
+    text-transform: uppercase;
+    font-size: 7vmin;
+    padding-left: 10%;
+    padding-right: 10%;
+    will-change: transform;
+}
+
+.navigationBar 
+{
+    width: 30vw;
+}
+
+.title
+{
+    font-family: 'Lora', sans-serif;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+ul li {
+    margin: 5px;
+    font-size: 12pt;
+    margin: 0;
+    text-align: left;
+}
+
+section:nth-child(odd)
+{
+    justify-content: flex-end;
+}
