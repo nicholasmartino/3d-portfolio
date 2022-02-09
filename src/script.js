@@ -720,6 +720,10 @@ const tick = () =>
         position = scrollLimit/2
     }
 
+    if (scrollYRatio < 0.1) {
+        
+    }
+
     console.log("Camera position", camera.position)
 
     let targetX = 0
