@@ -552,7 +552,7 @@ const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
 const sphereInitialY = 75
 sphere.position.set(0, sphereInitialY, -135)
 sphere.rotation.y = 5.16
-scene.add(sphere)
+// scene.add(sphere)
 console.log(sphere)
 
 const sphereParameters = {
