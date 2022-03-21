@@ -1,14 +1,11 @@
 import './style.css'
 import * as THREE from 'three'
 import * as dat from 'dat.gui'
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { Water } from 'three/examples/jsm/objects/Water.js'
 import { Sky } from 'three/examples/jsm/objects/Sky.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
 import { gsap } from 'gsap'
-import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader'
-import { Font } from 'three/examples/jsm/loaders/FontLoader'
-import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry'
 
 /**
  * Base
@@ -38,45 +35,45 @@ fogFolder.addColor(debugObject, 'fogColor').name('Fog Color').onChange(() => {
 fogFolder.add(scene.fog, 'density').min(0).max(0.01).step(0.0001).name('Fog Density')
 
 
-// Fonts
-debugObject.fontColor = 0x28a8de
-const ttfLoader = new TTFLoader()
-ttfLoader.load( './fonts/Metropolis-Medium-500.ttf', function ( json ) {
-    const font = new Font( json )
+// // Fonts
+// debugObject.fontColor = 0x28a8de
+// const ttfLoader = new TTFLoader()
+// ttfLoader.load( './fonts/Metropolis-Medium-500.ttf', function ( json ) {
+//     const font = new Font( json )
 
-    const mainTextGeometry = new TextGeometry(
-        "NIC MARTINO", {
-            font: font,
-            size: 10,
-            height: 0.2,
-        }
-    )
+//     const mainTextGeometry = new TextGeometry(
+//         "NIC MARTINO", {
+//             font: font,
+//             size: 10,
+//             height: 0.2,
+//         }
+//     )
 
-    const subTextGeometry = new TextGeometry(
-        "FULL-STACK DEVELOPER", {
-            font: font,
-            size: 4,
-            height: 0.2,
-        }
-    )
+//     const subTextGeometry = new TextGeometry(
+//         "FULL-STACK DEVELOPER", {
+//             font: font,
+//             size: 4,
+//             height: 0.2,
+//         }
+//     )
 
-    // Material - make sure you use Normal material to get that gradient color
-    const textMaterial = new THREE.MeshBasicMaterial({ color:debugObject['fontColor'] })
-    const mainText = new THREE.Mesh(mainTextGeometry, textMaterial)
-    const subText = new THREE.Mesh(subTextGeometry, textMaterial)
+//     // Material - make sure you use Normal material to get that gradient color
+//     const textMaterial = new THREE.MeshBasicMaterial({ color:debugObject['fontColor'] })
+//     const mainText = new THREE.Mesh(mainTextGeometry, textMaterial)
+//     const subText = new THREE.Mesh(subTextGeometry, textMaterial)
 
-    mainText.position.set(0, 7, 0)
-    subText.position.set(0, 0, 0)
+//     mainText.position.set(0, 7, 0)
+//     subText.position.set(0, 0, 0)
 
-    // scene.add(mainText)
-    // scene.add(subText)
+//     // scene.add(mainText)
+//     // scene.add(subText)
 
-    // const fontsFolder = gui.addFolder("Fonts")
-    // fontsFolder.addColor(debugObject, 'fontColor').name('Font Color').onChange(() => {
-    //     mainText.material.color.set(debugObject.fontColor)
-    //     subText.material.color.set(debugObject.fontColor)
-    // })
-} )
+//     // const fontsFolder = gui.addFolder("Fonts")
+//     // fontsFolder.addColor(debugObject, 'fontColor').name('Font Color').onChange(() => {
+//     //     mainText.material.color.set(debugObject.fontColor)
+//     //     subText.material.color.set(debugObject.fontColor)
+//     // })
+// } )
 
 
 // textGeometry.center()  //to center the text at the axis
@@ -135,38 +132,44 @@ const overlayMaterial = new THREE.ShaderMaterial({
         }
     ` 
 })
+// const overlayMaterial = new THREE.MeshBasicMaterial({
+//     color: 0x000000,
+//     transparent: true, 
+//     side: THREE.DoubleSide,
+//     opacity: 1.0
+// })
 const overlay = new THREE.Mesh(overlayGeometry, overlayMaterial)
-scene.add(overlay)
+// scene.add(overlay)
 
-ttfLoader.load( './fonts/Metropolis-Medium-500.ttf', function ( json ) {
-    const font = new Font( json )
+// ttfLoader.load( './fonts/Metropolis-Medium-500.ttf', function ( json ) {
+//     const font = new Font( json )
 
-    const textOverlayGeometry = new TextGeometry(
-        "HI, I'M NIC MARTINO", {
-            font: font,
-            size: 10,
-            height: 0.2,
-        }
-    )
+//     const textOverlayGeometry = new TextGeometry(
+//         "HI, I'M NIC MARTINO", {
+//             font: font,
+//             size: 10,
+//             height: 0.2,
+//         }
+//     )
     
-    // const subTextGeometry = new TextGeometry(
-    //     "FULL-STACK DEVELOPER", {
-    //         font: font,
-    //         size: 4,
-    //         height: 0.2,
-    //     }
-    // )
+//     // const subTextGeometry = new TextGeometry(
+//     //     "FULL-STACK DEVELOPER", {
+//     //         font: font,
+//     //         size: 4,
+//     //         height: 0.2,
+//     //     }
+//     // )
     
-    // Material - make sure you use Normal material to get that gradient color
-    const textOverlayMaterial = new THREE.MeshBasicMaterial({ 
-        color:debugObject['fontColor'],
-        transparent: true
-    })
-    const textOverlay = new THREE.Mesh(textOverlayGeometry, textOverlayMaterial)
-    // const subText = new THREE.Mesh(subTextGeometry, textMaterial)
+//     // Material - make sure you use Normal material to get that gradient color
+//     const textOverlayMaterial = new THREE.MeshBasicMaterial({ 
+//         color:debugObject['fontColor'],
+//         transparent: true
+//     })
+//     const textOverlay = new THREE.Mesh(textOverlayGeometry, textOverlayMaterial)
+//     // const subText = new THREE.Mesh(subTextGeometry, textMaterial)
     
-    // scene.add(textOverlay)
-})
+//     // scene.add(textOverlay)
+// })
 
 
 /**
@@ -174,11 +177,11 @@ ttfLoader.load( './fonts/Metropolis-Medium-500.ttf', function ( json ) {
  */
  const loadingManager = new THREE.LoadingManager(
     () => {
-        gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0 })
-        scene.remove(overlay)
+        // gsap.to(overlayMaterial.uniforms.uAlpha, { duration: 3, value: 0 })
+        // scene.remove(overlay)
     },
     () => {
-        console.log('Progress')
+        console.log('Loaded')
     }
 )
 
@@ -203,7 +206,7 @@ window.addEventListener('resize', () =>
 
     // Update renderer
     renderer.setSize(sizes.width, sizes.height)
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
 
     // // Update effect composer
     // effectComposer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
@@ -215,11 +218,22 @@ window.addEventListener('resize', () =>
 /**
  * Renderer
  */
-const renderer = new THREE.WebGLRenderer({canvas: canvas, antialias: true})
+ let pixelRatio = window.devicePixelRatio
+ let AA = true
+ if (pixelRatio > 1) {
+   AA = false
+ }
+
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas, 
+    alpha: true,
+    antialias: AA,
+    powerPreference: "high-performance",
+})
 renderer.setSize(sizes.width, sizes.height)
-renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
-renderer.shadowMap.enabled = true
-renderer.shadowMap.type = THREE.PCFSoftShadowMap
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 1))
+// renderer.shadowMap.enabled = true
+// renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.physicallyCorrectLights = true
 renderer.outputEncoding = THREE.sRGBEncoding
 renderer.toneMapping = THREE.ACESFilmicToneMapping
@@ -233,15 +247,14 @@ const pmremGenerator = new THREE.PMREMGenerator(renderer)
  * Environment map
  */
 const groundSize = 1000
-const geometry = new THREE.SphereGeometry(groundSize, 60, 40)
+const geometry = new THREE.SphereBufferGeometry(groundSize, 60, 40)
 
 const material = new THREE.MeshBasicMaterial({
     color: 0x9ad3de,
     //color: 0xe6af4b,
-    map: new THREE.TextureLoader(loadingManager).load('/hdris/hdri.png'),
+    map: new THREE.TextureLoader().load('./hdris/hdri.jpeg'),
     side: THREE.DoubleSide,
-    transparent: true,
-    opacity: 0.5
+    opacity: 0.8
 })
 
 const mesh = new THREE.Mesh(geometry, material)
@@ -254,7 +267,7 @@ scene.add(mesh)
  */
 // Geometry
 // const waterGeometry = new THREE.CircleBufferGeometry(groundSize, 128, 128)
-const waterGeometry = new THREE.PlaneGeometry(3000, 3000)
+const waterGeometry = new THREE.PlaneBufferGeometry(groundSize * 2, groundSize * 2)
 
 // Color`
 // debugObject.depthColor = '#186691'
@@ -281,12 +294,12 @@ const waterGeometry = new THREE.PlaneGeometry(3000, 3000)
 //     }
 // })
 
-const ground = new THREE.Mesh( new THREE.PlaneGeometry( groundSize, groundSize ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: false } ) );
-ground.rotation.x = - Math.PI / 2
-ground.position.y = 11
-ground.receiveShadow = true
-ground.side = THREE.DoubleSide
-scene.add(ground)
+// const ground = new THREE.Mesh( new THREE.PlaneGeometry( groundSize, groundSize ), new THREE.MeshStandardMaterial( { color: 0x999999, depthWrite: false } ) );
+// ground.rotation.x = - Math.PI / 2
+// ground.position.y = 11
+// ground.receiveShadow = true
+// ground.side = THREE.DoubleSide
+// scene.add(ground)
 
 // // Debug
 // gui.add(waterMaterial.uniforms.uBigWavesElevation, 'value').min(0).max(1).step(0.01).name('Elevation')
@@ -337,6 +350,8 @@ waterFolder.addColor(debugObject, 'waterColor').name('Water Color').onChange(() 
 waterFolder.addColor(debugObject, 'sunColor').name('Sun Color').onChange(() => {
     water.material.uniforms.sunColor.value.set(debugObject.sunColor)
 })
+water.material.transparent = true
+water.material.uniforms['alpha'].value = 0.8
 scene.add(water)
 console.log(water)
 
@@ -345,8 +360,8 @@ console.log(water)
  * Planes
  */
 const planeHeight = 40
-const planeGeometry = new THREE.PlaneGeometry(planeHeight * 1.618, planeHeight)
-const planeMaterial = new THREE.MeshStandardMaterial(0xffffff)
+const planeGeometry = new THREE.PlaneBufferGeometry(planeHeight * 1.618, planeHeight)
+const planeMaterial = new THREE.MeshBasicMaterial(0xffffff)
 planeMaterial.side = THREE.DoubleSide
 planeMaterial.opacity = 0.8
 const plane = new THREE.Mesh(planeGeometry, planeMaterial)
@@ -388,6 +403,22 @@ function onMouseWheel(event) {
 let scrollY = window.scrollY
 function onScroll(event) {
     scrollY = window.scrollY
+    // Scroll events    
+    // position += y
+    y *= .9
+
+    position = scrollY/2
+    position *= 0.9
+
+    const scrollYRatio = scrollY/scrollLimit
+    // console.log("Scroll y ratio", Math.round(scrollYRatio * 100), "%")
+
+    const positionX = cameraInitialX - (Math.cos(scrollYRatio) * rotationFactorX)
+    const positionZ = cameraInitialZ - (Math.sin(scrollYRatio) * rotationFactorZ)
+    camera.position.set(positionX, cameraInitialY, positionZ)
+
+    camera.lookAt(0, 0, 0)
+
 }
 
 /**
@@ -418,12 +449,13 @@ const lightFolder = gui.addFolder('Lights')
 const lightPositionFactor = 100
 const dirLight = new THREE.DirectionalLight(debugObject.lightColor, 2.8)
 dirLight.castShadow = true
-dirLight.shadow.camera.top = 1000
-dirLight.shadow.camera.bottom = -1000
-dirLight.shadow.camera.left = -1000
-dirLight.shadow.camera.right = 1000
-dirLight.shadow.camera.near = 0.1
-dirLight.shadow.camera.far = 1000
+const dirLightShadowBounds = 2000
+dirLight.shadow.camera.top = dirLightShadowBounds
+dirLight.shadow.camera.bottom = -dirLightShadowBounds
+dirLight.shadow.camera.left = -dirLightShadowBounds
+dirLight.shadow.camera.right = dirLightShadowBounds
+dirLight.shadow.camera.near = 1
+dirLight.shadow.camera.far = dirLightShadowBounds
 dirLight.shadow.mapSize.set(1024, 1024)
 dirLight.shadow.normalBias = 2.6
 dirLight.target.position.set(0, 0, 0)
@@ -436,7 +468,7 @@ shadowFolder.add(dirLight.shadow, 'bias').min(0).max(0.01).step(0.0001).name("Bi
 shadowFolder.add(dirLight.shadow, 'normalBias').min(0).max(3).step(0.001).name("Normal Bias")
 
 const sunLightHelper = new THREE.DirectionalLightHelper(dirLight)
-scene.add(sunLightHelper)
+// scene.add(sunLightHelper)
 
 const ambLight = new THREE.AmbientLight(debugObject.lightColor, 1.8)
 scene.add(ambLight)
@@ -497,84 +529,200 @@ sunFolder.add(skyUniforms.mieDirectionalG, 'value').min(0).max(1).step(0.001).na
 /**
  * Load Textures
  */
-const sandLoader = new THREE.TextureLoader(loadingManager)
-const sandColorMap = sandLoader.load('./textures/sand/Sand_007_basecolor.jpg')
-const sandNormalMap = sandLoader.load('./textures/sand/Sand_007_normal.jpg')
+const textureLoader = new THREE.TextureLoader(loadingManager)
+const sandColorMap = textureLoader.load('./textures/sand/Sand_007_basecolor.jpg')
+const sandNormalMap = textureLoader.load('./textures/sand/Sand_007_normal.jpg')
+const sandMaterial = new THREE.MeshBasicMaterial({
+    map: sandColorMap,
+    // normalMap: sandNormalMap
+})
 
  /**
  * Load Models
  */
-const sphereGeometry = new THREE.SphereGeometry(16, 50, 32)
-const sandMaterial = new THREE.MeshStandardMaterial({
-    map: sandColorMap,
-    normalMap: sandNormalMap
+const sphereGeometry = new THREE.SphereGeometry(380, 50, 32)
+const projectsTexture = textureLoader.load('./images/Projects-01.png')
+const sphereMaterial = new THREE.MeshPhongMaterial({
+    map: projectsTexture,
+    // side: THREE.DoubleSide,
+    alphaTest: 0.5
 })
-const sphere = new THREE.Mesh(sphereGeometry, sandMaterial)
-sphere.position.set(0, 0, 0)
-sphere.castShadow = true
-sphere.receiveShadow = true
-// scene.add(sphere)
 
-const glassMaterial = new THREE.MeshPhysicalMaterial()
+const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+const sphereInitialY = 75
+sphere.position.set(0, sphereInitialY, -135)
+sphere.rotation.y = 5.16
+scene.add(sphere)
+console.log(sphere)
+
+const sphereParameters = {
+    'scale': 1
+}
+const resizeSphere = () => {
+    sphere.scale.set(sphereParameters.scale, sphereParameters.scale, sphereParameters.scale)
+}
+
+const domeFolder = gui.addFolder('Project Display')
+domeFolder.add(sphere.position, 'x').min(-300).max(300).step(0.01).name("Position X")
+domeFolder.add(sphere.position, 'y').min(-100).max(100).step(0.01).name("Position Y")
+domeFolder.add(sphere.position, 'z').min(-300).max(300).step(0.01).name("Position Z")
+domeFolder.add(sphereParameters, 'scale').min(0).max(2).step(0.01).name("Scale").onChange(resizeSphere)
+domeFolder.add(sphere.rotation, 'y').min(0).max(Math.PI * 2).step(0.01).name("Rotation")
+
+const glassMaterial = new THREE.MeshBasicMaterial()
 glassMaterial.transparent = true
 glassMaterial.color = new THREE.Color(debugObject['waterColor'])
-glassMaterial.metalness = 0.9
-glassMaterial.opacity = 0.8
-glassMaterial.reflectivity = 0.5
+glassMaterial.metalness = 0.8
+glassMaterial.opacity = 0.3
+glassMaterial.reflectivity = 0.7
+
+const woodColorMap = textureLoader.load('./textures/sand/Sand_007_basecolor.jpg')
+const woodNormalMap = textureLoader.load('./textures/sand/Sand_007_normal.jpg')
+const woodMaterial = new THREE.MeshBasicMaterial({
+    map: woodColorMap,
+    // normalMap: woodNormalMap
+})
 
 const onProgress = function (xhr) {
     if (xhr.lengthComputable) {
         const percentComplete = xhr.loaded / xhr.total * 100;
-        console.log(Math.round(percentComplete, 2) + '% downloaded');
+        //console.log(Math.round(percentComplete, 2) + '%');
     } 
 }
-let solNascenteModel
-const loader = new GLTFLoader(loadingManager)
-loader.load('./models/SolNascente.glb', function (gltf) {
-    gltf.scene.position.x = -15
-    gltf.scene.position.y = 1
-    gltf.scene.position.z = -270
-    gltf.scene.rotation.y = 0.5
+const gltfLoader = new GLTFLoader(loadingManager)
+const dracoLoader = new DRACOLoader()
+dracoLoader.setDecoderPath('./decoder/')
+dracoLoader.preload()
+gltfLoader.setDRACOLoader(dracoLoader)
+console.log(dracoLoader)
+
+
+/**
+ * Load ribeira texture
+ */
+
+ let ribeiraTextureControls = {
+    'width': 446,
+    'height': 599
+}
+const ribeiraPlaneGeometry = new THREE.PlaneBufferGeometry(ribeiraTextureControls.width, ribeiraTextureControls.height)
+ribeiraPlaneGeometry.rotateX(Math.PI/2)
+ribeiraPlaneGeometry.rotateY(Math.PI/2)
+
+
+const ribeiraTextureLoader = new THREE.TextureLoader()
+const ribeiraTexture = new THREE.MeshBasicMaterial({
+    map: ribeiraTextureLoader.load('./textures/models/RibeiraGroundTexture.png'),
+    side: THREE.DoubleSide,
+    alphaTest: 0.5
+})
+const ribeiraTextureMesh = new THREE.Mesh(ribeiraPlaneGeometry, ribeiraTexture)
+ribeiraTextureMesh.position.x = -55
+ribeiraTextureMesh.position.y = 2.1
+ribeiraTextureMesh.position.z = 170
+ribeiraTextureMesh.rotation.y = 0.43
+ribeiraTextureMesh.rotation.z = Math.PI
+scene.add(ribeiraTextureMesh)
+console.log(ribeiraPlaneGeometry)
+const ribeiraFolder = gui.addFolder('Ribeira')
+console.log(ribeiraTextureMesh.geometry)
+ribeiraFolder.add(ribeiraTextureMesh.scale, 'x').min(0.5).max(1.2).step(0.001).name('Ground Width')
+ribeiraFolder.add(ribeiraTextureMesh.scale, 'z').min(0.5).max(1.2).step(0.001).name('Ground Height')
+ribeiraFolder.add(ribeiraTextureMesh.position, 'x').min(-300).max(300).step(0.01).name('Ground X')
+ribeiraFolder.add(ribeiraTextureMesh.position, 'y').min(-50).max(50).step(0.01).name('Ground Y')
+ribeiraFolder.add(ribeiraTextureMesh.position, 'z').min(-300).max(300).step(0.01).name('Ground Z')
+ribeiraFolder.add(ribeiraTextureMesh.rotation, 'y').min(0).max(Math.PI * 2).name('Grnd. Rot. Y').step(0.01)
+ribeiraFolder.add(ribeiraTextureMesh.rotation, 'z').min(0).max(Math.PI * 2).name('Grnd. Rot. Z').step(0.01)
+
+
+// let solNascenteModel
+// loader.load('./models/SolNascente.glb', function (gltf) {
+//     // gltf.scene.position.x = 15
+//     // gltf.scene.position.y = 2
+//     // gltf.scene.position.z = -295
+//     // gltf.scene.rotation.y = 5.035
+
+//     gltf.scene.position.x = 158
+//     gltf.scene.position.y = 3
+//     gltf.scene.position.z = -350
+//     gltf.scene.rotation.y = 1.9
+
+//     // gltf.scene.traverse((child) => {
+//     //     if (child.isMesh) {
+//     //         child.castShadow = true
+//     //         child.receiveShadow = true
+//     //         console.log(child.material.name)
+//     //     }
+//     // })
+//     solNascenteModel = gltf
+//     scene.add(gltf.scene)
+//     const solNascenteFolder = gui.addFolder('Sol Nascente')
+//     solNascenteFolder.add(gltf.scene.position, 'x').min(-500).max(500).name('Sol Nascente X')
+//     solNascenteFolder.add(gltf.scene.position, 'z').min(-500).max(500).name('Sol Nascente Z')
+//     solNascenteFolder.add(gltf.scene.rotation, 'y').min(0).max(Math.PI * 2).step(0.0001).name('Sol Nascente Heading')
+//     console.log("Sol Nascente loaded")
+// }, onProgress)
+
+
+const assignMaterial = (child) => {
+    // Water
+    if ([
+        '[Translucent Glass Tinted]1', 
+        'Glass', 
+        '_Color M05_#3', 
+        'Final_glass',
+    ].includes(child.material.name)) {
+        return glassMaterial
+    } else if ([
+        'Vegetation Bark Maple', 
+        'GenSand', 
+    ].includes(child.material.name)) {
+        return sandMaterial
+    } else if ([
+        'D:Color [A=255, R=135, G=120, B=84]-E:Color [Black]-S:Color [White]-T:0-S:0',
+    ].includes(child.material.name)){
+        return woodMaterial
+    } else {
+        console.log(child.material.name)
+        return child.material
+    }
+}
+
+let paranoaModel
+gltfLoader.load('./models/Paranoa.glb', function (gltf) {
+    gltf.scene.position.x = 177
+    gltf.scene.position.y = 4
+    gltf.scene.position.z = -750
+    gltf.scene.rotation.y = 2.4
     gltf.scene.traverse((child) => {
         if (child.isMesh) {
-            console.log("is mesh")
-            child.castShadow = true
-            child.receiveShadow = true
+            child.frustumCulled = false
+            // console.log(child.material.name)
+            // child.material = assignMaterial(child)
         }
     })
-    solNascenteModel = gltf
+    paranoaModel = gltf
     scene.add(gltf.scene)
-    const solNascenteFolder = gui.addFolder('Sol Nascente')
-    solNascenteFolder.add(gltf.scene.position, 'x').min(-500).max(500).name('Sol Nascente X')
-    solNascenteFolder.add(gltf.scene.position, 'z').min(-500).max(500).name('Sol Nascente Z')
-    solNascenteFolder.add(gltf.scene.rotation, 'y').min(0).max(Math.PI * 2).step(0.0001).name('Sol Nascente Heading')
+    const paranoaFolder = gui.addFolder('Paranoa')
+    paranoaFolder.add(gltf.scene.position, 'x').min(-700).max(700).name('Paranoa X')
+    paranoaFolder.add(gltf.scene.position, 'y').min(-10).max(10).name('Paranoa Y')
+    paranoaFolder.add(gltf.scene.position, 'z').min(-1000).max(1000).name('Paranoa Z')
+    paranoaFolder.add(gltf.scene.rotation, 'y').min(0).max(Math.PI * 2).step(0.0001).name('Paranoa Heading')
+    console.log("Paranoa loaded")
 }, onProgress)
 
+
 let aquariumModel
-loader.load('./models/Aquarium.glb', function (gltf) {
-    gltf.scene.position.x = -100
+gltfLoader.load('./models/Aquarium.glb', function (gltf) {
+    gltf.scene.position.x = -335
     gltf.scene.position.y = 2.5
-    gltf.scene.position.z = -100
-    gltf.scene.rotation.y = 3.18
-    gltf.scene.traverse((child) => {
-        if (child.isMesh) {
-            child.castShadow = true
-            child.receiveShadow = true
-            // Water
-            if (child.material.name == '[Translucent Glass Tinted]1') {
-                child.material = glassMaterial
-                child.material.transparent = true
-            }
-            // Glass
-            if (child.material.name == '_Color M05_#3') {
-                child.material = glassMaterial
-            }
-            // Sand
-            if (child.material.name == 'Vegetation Bark Maple') {
-                child.material = sandMaterial
-            }
-        }
-    })
+    gltf.scene.position.z = -32
+    gltf.scene.rotation.y = 4.85
+    // gltf.scene.traverse((child) => {
+    //     if (child.isMesh) {
+    //         child.material = assignMaterial(child)
+    //     }
+    // })
     aquariumModel = gltf
     scene.add(gltf.scene)
     const aquariumFolder = gui.addFolder('Aquarium')
@@ -582,21 +730,64 @@ loader.load('./models/Aquarium.glb', function (gltf) {
     aquariumFolder.add(gltf.scene.position, 'y').min(-10).max(10).name('Aquarium Y')
     aquariumFolder.add(gltf.scene.position, 'z').min(-500).max(500).name('Aquarium Z')
     aquariumFolder.add(gltf.scene.rotation, 'y').min(0).max(Math.PI * 2).step(0.0001).name('Aquarium Heading')
+    console.log("Aquarium loaded")
 }, onProgress)
+
+let ribeiraModel
+gltfLoader.load('./models/Ribeira.glb', function (gltf) {
+    gltf.scene.position.x = -232
+    gltf.scene.position.y = 2
+    gltf.scene.position.z = -32
+    gltf.scene.rotation.y = 2
+    gltf.scene.traverse((child) => {
+        if (child.isMesh) {
+            child.frustumCulled = false
+            child.material = assignMaterial(child)
+        }
+    })
+    ribeiraModel = gltf
+    scene.add(gltf.scene)
+    ribeiraFolder.add(gltf.scene.position, 'x').min(-500).max(500).name('Ribeira X')
+    ribeiraFolder.add(gltf.scene.position, 'y').min(-10).max(10).name('Ribeira Y')
+    ribeiraFolder.add(gltf.scene.position, 'z').min(-500).max(500).name('Ribeira Z')
+    ribeiraFolder.add(gltf.scene.rotation, 'y').min(0).max(Math.PI * 2).step(0.0001).name('Ribeira Heading')
+    console.log("Ribeira loaded")
+}, onProgress)
+
+// let structureModel
+// loader.load('./models/structure.glb', function (gltf) {
+//     gltf.scene.position.x = 0
+//     gltf.scene.position.y = 0
+//     gltf.scene.position.z = 0
+//     gltf.scene.rotation.y = 0
+//     structureModel = gltf
+//     scene.add(gltf.scene)
+//     const structureFolder = gui.addFolder('Structure')
+//     structureFolder.add(gltf.scene.position, 'x').min(-500).max(500).name('Structure X')
+//     structureFolder.add(gltf.scene.position, 'y').min(-10).max(10).name('Structure Y')
+//     structureFolder.add(gltf.scene.position, 'z').min(-500).max(500).name('Structure Z')
+//     structureFolder.add(gltf.scene.rotation, 'y').min(0).max(Math.PI * 2).step(0.0001).name('Structure Heading')
+//     console.log("Structure loaded")
+// }, onProgress)
 
 
 /**
  * Camera
  */
 // Base camera
-const fov = 55
+const fov = 40
 const aspect = sizes.width / sizes.height
 const near = 1
-const far = 5000
+const far = 2000
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far)
-const cameraInitialX = 90
-const cameraInitialZ = 210
-camera.position.set(0, cameraInitialX, cameraInitialZ)
+const cameraInitialX = 100
+const cameraInitialY = 90
+const cameraInitialZ = 400
+const rotationFactorX = 700
+const rotationFactorZ = 1200
+const positionX = cameraInitialX - (Math.cos(0) * rotationFactorX)
+const positionZ = cameraInitialZ - (Math.sin(0) * rotationFactorZ)
+camera.position.set(positionX, cameraInitialY, positionZ)
 scene.add(camera)
 const cameraFolder = gui.addFolder('Camera')
 cameraFolder.add(camera.position, 'x', -2000, 2000).step(5).name('Camera X')
@@ -667,6 +858,14 @@ updateSun()
 /**
  * Animate
  */
+// const scrollYRatio = scrollY/scrollLimit
+// let positionX30 = cameraInitialX - (scrollYRatio * xSpeed)
+// let positionZ30 = cameraInitialZ + (scrollYRatio * zSpeed * 0.31)
+// let positionX80 = positionX30 + ((scrollYRatio - 0.3) * xSpeed * 0.62)
+// let positionZ80 = positionZ30 - ((scrollYRatio - 0.3) * zSpeed * 0.62)
+// let positionX100 = positionX80 + ((scrollYRatio - 0.8) * xSpeed * 4)
+// let positionZ100 = positionZ80 - (scrollYRatio - 0.8)
+
 const clock = new THREE.Clock()
 const tick = () =>
 {
@@ -674,63 +873,23 @@ const tick = () =>
     // // Update controls
     // controls.update()
 
-    const time = performance.now() * 0.001;
+    const time = performance.now() * 0.05;
 
     water.material.uniforms['time'].value += 1.0 / 60.0
-    water.material.transparent = true
-    water.material.uniforms['alpha'].value = 0.8
 
-    if (solNascenteModel != null) {
-        solNascenteModel.scene.position.y = Math.sin(time * 0.6) + 2
+    if (water != null) {
+        water.position.y = Math.sin(time * 0.01) - 0.1
     }
+
+    sphere.position.y = Math.sin(time * 0.01) - 0.1 + sphereInitialY
+
+    // if (solNascenteModel != null) {
+    //     solNascenteModel.scene.position.y = Math.sin(time * 0.6) + 2
+    // }
     
-    if (aquariumModel != null) {
-        aquariumModel.scene.position.y = Math.sin(time * 0.5) + 1.8
-    }
-
-    // Scroll events    
-    // position += y
-    y *= .9
-
-    position = scrollY/2
-    position *= 0.9
-
-    const xSpeed = 400
-    const zSpeed = 1200
-
-    const scrollYRatio = scrollY/scrollLimit
-    console.log("Scroll y ratio", Math.round(scrollYRatio * 100), "%")
-    if (position < 0) {
-        camera.position.x = cameraInitialX
-        camera.position.y = 90
-        camera.position.z = cameraInitialZ
-        scrollYRatio = 0
-    } else if (scrollYRatio >= 0 && scrollYRatio < 0.3) {
-        camera.position.x = cameraInitialX + (scrollYRatio * xSpeed)
-        camera.position.y = 90
-        camera.position.z = cameraInitialZ - (scrollYRatio * zSpeed)
-    } else if (scrollYRatio > 0.3 && scrollYRatio < 0.8) {
-        camera.position.x = cameraInitialX + (0.3 * xSpeed) - ((scrollYRatio - 0.3) * xSpeed * 0.62)
-        camera.position.y = 90
-        camera.position.z = cameraInitialZ - (0.3 * zSpeed) - ((scrollYRatio - 0.3) * zSpeed * 0.62)
-    } else if (scrollYRatio > 0.8) {
-        camera.position.x = cameraInitialX + (0.3 * xSpeed) - (0.5 * xSpeed * 0.62) - ((scrollYRatio - 0.8) * xSpeed * 3.24)
-        camera.position.y = 90
-        camera.position.z = cameraInitialZ - (0.3 * zSpeed) - (0.5 * zSpeed * 0.62) + ((scrollYRatio - 0.8) * zSpeed * 0.62)
-        position = scrollLimit/2
-    }
-
-    if (scrollYRatio < 0.1) {
-
-    }
-
-    console.log("Camera position", camera.position)
-
-    let targetX = 0
-    let targetY = 0
-    let targetZ = 0
-
-    camera.lookAt(targetX, targetY, targetZ)
+    // if (aquariumModel != null) {
+    //     aquariumModel.scene.position.y = Math.sin(time * 0.5) + 1.8
+    // }
 
     // Render
     renderer.render(scene, camera)
